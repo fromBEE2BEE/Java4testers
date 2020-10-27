@@ -9,8 +9,9 @@ package ru.stqa.pft.sandbox;
         Rectangle r = new Rectangle(4, 6);
         System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
-        Point p1 = new Point();
-        Point p2 = new Point();
+        Point p1 = new Point(3,3);
+        Point p2 = new Point(7,6);
+
         System.out.println("Distance between p1 and p2 = "  + distance(p1, p2));
     }
     public static void hello(String somebody) {
