@@ -1,6 +1,5 @@
 apply plugin: 'java'
-apply plugin: 'application'
-mainClassName = "ru.stqa.pft.sandbox.MyFirstProgram"
+
 
 repositories{
     mavenCentral()
@@ -8,5 +7,6 @@ repositories{
 
 dependencies{
     implementation 'com.slickqa:testng:7.0.0-7'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
 
 }
