@@ -35,7 +35,7 @@ public class GroupCreationTests {
   public void testGroupCreation() throws Exception {
     gotoGroupPage();
     initGroupCreation(By.xpath("(//input[@name='new'])[2]"));
-    fillGroupForm("testQ1", "testQ2", "testQ3");
+    fillGroupForm(new GroupData("testQ1", "testQ2", "testQ3"));
     submitGroupCreation("submit");
     returnToGroupPage("group page");
 
@@ -49,16 +49,16 @@ public class GroupCreationTests {
     wd.findElement(By.name(submit)).click();
   }
 
-  private void fillGroupForm(String name, String header, String footer) {
+  private void fillGroupForm(GroupData groupData) {
     submitGroupCreation("group_name");
     wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(name);
+    wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(header);
+    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(footer);
+    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
   }
 
   private void initGroupCreation(By xpath) {
