@@ -20,67 +20,67 @@ public class NewContactCreationTests {
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.get("http://localhost/addressbook/group.php?new=New+group");
+    login();
   }
 
-  @Test
-  public void testNewContactCreation() throws Exception {
-    wd.get("http://localhost/addressbook/group.php?new=New+group");
+  private void login() {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.linkText("add new")).click();
+  }
+
+  @Test
+  public void testNewContactCreation() throws Exception {
+    initNewContactCteation();
+    fillNewContactForm();
+    submitNewContactCreation("(//input[@name='submit'])[2]");
+    returnToHomePage("home page");
+  }
+
+  private void returnToHomePage(String s) {
+    wd.findElement(By.linkText(s)).click();
+  }
+
+  private void submitNewContactCreation(String s) {
+    wd.findElement(By.xpath(s)).click();
+  }
+
+  private void fillNewContactForm() {
     wd.findElement(By.name("firstname")).click();
-    wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys("Makoviy");
-    wd.findElement(By.name("lastname")).click();
-    wd.findElement(By.name("firstname")).click();
-    wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys("");
-    wd.findElement(By.name("lastname")).click();
-    wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys("Makoviy");
-    wd.findElement(By.name("firstname")).click();
-    wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys("Zhanna");
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).sendKeys("Makoviy");
+    wd.findElement(By.name("title")).click();
+    wd.findElement(By.name("title")).sendKeys("Content Marketing Writer");
     wd.findElement(By.name("company")).click();
-    wd.findElement(By.name("company")).clear();
     wd.findElement(By.name("company")).sendKeys("Innovecs");
     wd.findElement(By.name("address")).click();
-    wd.findElement(By.name("address")).clear();
     wd.findElement(By.name("address")).sendKeys("Kyiv, blvr Vatslava Gavela, 6 \"3\"");
-    wd.findElement(By.name("theform")).click();
-    wd.findElement(By.name("theform")).click();
-    wd.findElement(By.name("mobile")).click();
     wd.findElement(By.name("work")).click();
-    wd.findElement(By.name("work")).clear();
     wd.findElement(By.name("work")).sendKeys("+38(044)5937794");
     wd.findElement(By.name("email")).click();
-    wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys("marketing@innovecs.com");
     wd.findElement(By.name("new_group")).click();
     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("testQ1");
-    wd.findElement(By.xpath("//option[@value='32']")).click();
-    wd.findElement(By.name("address2")).click();
-    wd.findElement(By.name("title")).click();
-    wd.findElement(By.name("title")).click();
-    wd.findElement(By.name("title")).clear();
-    wd.findElement(By.name("title")).sendKeys("Content Marketing Writer");
-    wd.findElement(By.name("notes")).click();
-    wd.findElement(By.name("notes")).clear();
-    wd.findElement(By.name("notes")).sendKeys("Content Marketing Writer");
-    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
-    wd.findElement(By.linkText("home page")).click();
-    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void initNewContactCteation() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
+    logout("Logout");
     wd.quit();
 
+  }
+
+  private void logout(String logout) {
+    wd.findElement(By.linkText(logout)).click();
   }
 
   private boolean isElementPresent(By by) {
