@@ -36,7 +36,7 @@ public class NewContactCreationTests {
   @Test
   public void testNewContactCreation() throws Exception {
     initNewContactCteation();
-    fillNewContactForm("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", "new_group");
+    fillNewContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", "new_group"));
     submitNewContactCreation("(//input[@name='submit'])[2]");
     returnToHomePage("home page");
   }
@@ -49,23 +49,23 @@ public class NewContactCreationTests {
     wd.findElement(By.xpath(s)).click();
   }
 
-  private void fillNewContactForm(String firstname, String lastname, String title, String company, String address, String telephoneWork, String email, String contactGroup) {
+  private void fillNewContactForm(ContactData contactData) {
     wd.findElement(By.name("firstname")).click();
-    wd.findElement(By.name("firstname")).sendKeys(firstname);
+    wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
     wd.findElement(By.name("lastname")).click();
-    wd.findElement(By.name("lastname")).sendKeys(lastname);
+    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
     wd.findElement(By.name("title")).click();
-    wd.findElement(By.name("title")).sendKeys(title);
+    wd.findElement(By.name("title")).sendKeys(contactData.getTitle());
     wd.findElement(By.name("company")).click();
-    wd.findElement(By.name("company")).sendKeys(company);
+    wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
     wd.findElement(By.name("address")).click();
-    wd.findElement(By.name("address")).sendKeys(address);
+    wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
     wd.findElement(By.name("work")).click();
-    wd.findElement(By.name("work")).sendKeys(telephoneWork);
+    wd.findElement(By.name("work")).sendKeys(contactData.getTelephoneWork());
     wd.findElement(By.name("email")).click();
-    wd.findElement(By.name("email")).sendKeys(email);
+    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name(contactGroup))).selectByVisibleText("testQ1");
+    new Select(wd.findElement(By.name(contactData.getContactGroup()))).selectByVisibleText("testQ1");
   }
 
   private void initNewContactCteation() {
