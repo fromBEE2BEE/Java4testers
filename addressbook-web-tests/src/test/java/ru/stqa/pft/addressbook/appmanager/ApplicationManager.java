@@ -3,14 +3,23 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-  private WebDriver wd;
+  private FirefoxDriver wd;
+
+  public boolean isAlertPresent(FirefoxDriver wd) {
+    try {
+      wd.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
 
   public void init() {
     wd = new FirefoxDriver();
@@ -57,6 +66,7 @@ public class ApplicationManager {
   }
 
   public void stop() {
+    wd.manage().timeouts().implicitlyWait(350, TimeUnit.SECONDS);
     logout();
     wd.quit();
   }
@@ -74,14 +84,7 @@ public class ApplicationManager {
     }
   }
 
-  private boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
+
 
   public void deleteSelectedGroups() {
     wd.findElement(By.name("delete")).click();
