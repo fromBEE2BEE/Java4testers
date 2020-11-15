@@ -7,7 +7,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager extends GroupHelper {
+public class ApplicationManager {
+  FirefoxDriver wd;
+  private GroupHelper groupHelper;
 
   public boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -23,20 +25,21 @@ public class ApplicationManager extends GroupHelper {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
+    groupHelper = new GroupHelper(wd);
     login("user", "pass", By.xpath("//input[@value='Login']"), "admin", "secret");
   }
 
   private void login(String user, String pass, By xpath, String username, String password) {
     wd.findElement(By.name(user)).clear();
     wd.findElement(By.name(user)).sendKeys(username);
-    initGroupCreation(By.name(pass));
+    groupHelper.initGroupCreation(By.name(pass));
     wd.findElement(By.name(pass)).clear();
     wd.findElement(By.name(pass)).sendKeys(password);
-    initGroupCreation(xpath);
+    groupHelper.initGroupCreation(xpath);
   }
 
   public void gotoGroupPage() {
-    initGroupCreation(By.linkText("groups"));
+    groupHelper.initGroupCreation(By.linkText("groups"));
   }
 
   public void stop() {
@@ -46,7 +49,7 @@ public class ApplicationManager extends GroupHelper {
   }
 
   private void logout() {
-    initGroupCreation(By.linkText("Logout"));
+    groupHelper.initGroupCreation(By.linkText("Logout"));
   }
 
   private boolean isElementPresent(By by) {
@@ -60,5 +63,9 @@ public class ApplicationManager extends GroupHelper {
 
 
   public void returnToGroupPage() {
+  }
+
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
   }
 }

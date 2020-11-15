@@ -9,10 +9,10 @@ public class GroupCreationTests extends TestBase {
   @Test
   public void testGroupCreation() throws Exception {
     app.gotoGroupPage();
-    app.initGroupCreation(By.xpath("(//input[@name='new'])[2]"));
-    app.fillGroupForm(new GroupData("testQ1", "testQ2", "testQ3"));
-    app.submitGroupCreation("submit");
-    app.returnToGroupPage("group page");
+    app.getGroupHelper().initGroupCreation(By.xpath("(//input[@name='new'])[2]"));
+    app.getGroupHelper().fillGroupForm(new GroupData("testQ1", "testQ2", "testQ3"));
+    app.getGroupHelper().submitGroupCreation("submit");
+    app.getGroupHelper().returnToGroupPage("group page");
 
   }
 

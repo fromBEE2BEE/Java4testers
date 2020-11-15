@@ -5,7 +5,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 public class GroupHelper {
-  protected FirefoxDriver wd;
+  private FirefoxDriver wd;
+
+  public GroupHelper(FirefoxDriver wd) {
+    this.wd = wd;
+  }
 
   public void returnToGroupPage(String s) {
     wd.findElement(By.linkText(s)).click();
