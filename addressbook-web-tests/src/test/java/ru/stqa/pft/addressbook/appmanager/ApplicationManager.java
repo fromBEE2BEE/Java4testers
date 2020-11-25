@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   FirefoxDriver wd;
+  private SessionHelper sessionHelper;
+  private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public boolean isAlertPresent(FirefoxDriver wd) {
@@ -26,21 +28,12 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
     groupHelper = new GroupHelper(wd);
-    login("user", "pass", By.xpath("//input[@value='Login']"), "admin", "secret");
+    navigationHelper = new NavigationHelper(wd);
+    sessionHelper = new SessionHelper(wd);
+    sessionHelper.login("user", "pass", By.xpath("//input[@value='Login']"), "admin", "secret");
   }
 
-  private void login(String user, String pass, By xpath, String username, String password) {
-    wd.findElement(By.name(user)).clear();
-    wd.findElement(By.name(user)).sendKeys(username);
-    groupHelper.initGroupCreation(By.name(pass));
-    wd.findElement(By.name(pass)).clear();
-    wd.findElement(By.name(pass)).sendKeys(password);
-    groupHelper.initGroupCreation(xpath);
-  }
 
-  public void gotoGroupPage() {
-    groupHelper.initGroupCreation(By.linkText("groups"));
-  }
 
   public void stop() {
     wd.manage().timeouts().implicitlyWait(350, TimeUnit.SECONDS);
@@ -49,7 +42,7 @@ public class ApplicationManager {
   }
 
   private void logout() {
-    groupHelper.initGroupCreation(By.linkText("Logout"));
+    wd.findElement(By.linkText("Logout")).click();
   }
 
   private boolean isElementPresent(By by) {
@@ -67,5 +60,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }
