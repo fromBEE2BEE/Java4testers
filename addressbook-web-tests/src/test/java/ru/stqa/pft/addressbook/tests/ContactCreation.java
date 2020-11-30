@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class NewContactCreationTests {
+public class ContactCreation {
   private WebDriver wd;
 
 
@@ -20,7 +20,7 @@ public class NewContactCreationTests {
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/group.php?new=New+group");
+    wd.get("http://localhost/addressbook/");
     login("admin", "secret");
   }
 
@@ -34,8 +34,8 @@ public class NewContactCreationTests {
   }
 
   @Test
-  public void testNewContactCreation() throws Exception {
-    initNewContactCteation();
+  public void testContactCreation() throws Exception {
+    initContactCreation();
     fillNewContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", "new_group"));
     submitNewContactCreation("(//input[@name='submit'])[2]");
     returnToHomePage("home page");
@@ -68,7 +68,7 @@ public class NewContactCreationTests {
     new Select(wd.findElement(By.name(contactData.getContactGroup()))).selectByVisibleText("testQ1");
   }
 
-  private void initNewContactCteation() {
+  private void initContactCreation() {
     wd.findElement(By.linkText("add new")).click();
   }
 

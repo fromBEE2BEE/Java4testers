@@ -13,3 +13,23 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
+
+
+
+http://internetka.in.ua/selenium-driver-aler/
+
+
+https://www.selenium.dev/documentation/en/
+
+https://qna.habr.com/q/223376
+
+
+WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(10));
+  Alert alert = (new WebDriverWait(wd, 10))
+          .until(ExpectedConditions.alertIsPresent());
+  public void acceptAlert(){
+    alert = wd.switchTo().alert();
+    alert.accept();}
+	
+	
+	WebElement firstResult = wait.until(presenceOfElementLocated(By.cssSelector("div.msgbox")));
