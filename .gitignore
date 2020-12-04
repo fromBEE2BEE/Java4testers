@@ -33,3 +33,31 @@ WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(10));
 	
 	
 	WebElement firstResult = wait.until(presenceOfElementLocated(By.cssSelector("div.msgbox")));
+	
+	
+	wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+	
+	
+	
+WebElement msgbox = wd.findElement(By.cssSelector("div.msgbox"));
+
+
+Thread.sleep(2000);
+
+wd.findElement(By.cssSelector("div.msgbox")).wait();
+
+Alert alert = wd.switchTo().alert();
+    alert.accept();
+	
+	
+private WebDriver wd;
+
+
+protected final ApplicationManager app = new ApplicationManager();
+
+
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.2'	
+	
+	
+	

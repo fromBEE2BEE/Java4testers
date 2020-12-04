@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
@@ -14,7 +13,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.concurrent.TimeUnit;
 
 public class ContactCreation {
-  private WebDriver wd;
+  FirefoxDriver wd;
 
 
   @BeforeMethod(alwaysRun = true)
