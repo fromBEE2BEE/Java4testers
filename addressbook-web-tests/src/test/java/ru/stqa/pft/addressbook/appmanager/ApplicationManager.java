@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,12 +7,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.Thread.sleep;
-
 public class ApplicationManager {
 
   FirefoxDriver wd;
 
+  private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
@@ -33,6 +31,7 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     groupHelper = new GroupHelper(wd);
+    contactHelper = new ContactHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login("user", "pass", By.xpath("//input[@value='Login']"), "admin", "secret");
@@ -48,26 +47,6 @@ public class ApplicationManager {
 
   public void logout() {
     wd.findElement(By.linkText("Logout")).click();
-  }
-
-  public void alertContactDeletion() throws InterruptedException {
-    acceptAlert();
-    sleep(3000);
-  }
-
-  public void initDeleteSelectedContact() throws InterruptedException {
-    wd.findElement(By.xpath("//div[2]/input")).click();
-    sleep(2000);
-  }
-
-  public void selectContactForDeletion() throws InterruptedException {
-    wd.findElement(By.xpath("//input[@id]")).click();
-    sleep(2000);
-  }
-
-  public void acceptAlert(){
-    Alert alert = wd.switchTo().alert();
-    alert.accept();
   }
 
   public boolean isElementPresent(By by) {
@@ -89,5 +68,9 @@ public class ApplicationManager {
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public ContactHelper getContactHelper() {
+    return contactHelper;
   }
 }
