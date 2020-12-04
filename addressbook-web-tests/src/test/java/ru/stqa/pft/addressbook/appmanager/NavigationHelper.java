@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper {
+
   private FirefoxDriver wd;
 
   public NavigationHelper(FirefoxDriver wd) {
@@ -12,5 +13,13 @@ public class NavigationHelper {
 
   public void gotoGroupPage() {
     wd.findElement(By.linkText("groups")).click();
+  }
+
+  public void returnToHomePage(String s) {
+    wd.findElement(By.linkText(s)).click();
+  }
+
+  public void initContactCreation() {
+    wd.findElement(By.linkText("add new")).click();
   }
 }

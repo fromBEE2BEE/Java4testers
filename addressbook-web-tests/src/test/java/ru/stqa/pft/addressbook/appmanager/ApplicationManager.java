@@ -36,7 +36,7 @@ public class ApplicationManager {
   }
 
   public void logout() {
-    wd.findElement(By.linkText("Logout")).click();
+    navigationHelper.returnToHomePage("Logout");
   }
 
   public boolean isElementPresent(By by) {
@@ -64,13 +64,6 @@ public class ApplicationManager {
     return contactHelper;
   }
 
-  public void returnToHomePage(String s) {
-    wd.findElement(By.linkText(s)).click();
-  }
-
-  public void initContactCreation() {
-    wd.findElement(By.linkText("add new")).click();
-  }
 
 
 }
