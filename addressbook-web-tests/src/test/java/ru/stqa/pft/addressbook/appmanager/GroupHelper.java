@@ -5,7 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 public class GroupHelper {
-  private FirefoxDriver wd;
+  FirefoxDriver wd;
 
   public GroupHelper(FirefoxDriver wd) {
     this.wd = wd;
