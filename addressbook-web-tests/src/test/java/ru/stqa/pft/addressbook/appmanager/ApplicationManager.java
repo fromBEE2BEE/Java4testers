@@ -9,12 +9,10 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   FirefoxDriver wd;
 
-
   private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
-
 
   public void init() {
     wd = new FirefoxDriver();
@@ -27,18 +25,14 @@ public class ApplicationManager {
     sessionHelper.login("user", "pass", By.xpath("//input[@value='Login']"), "admin", "secret");
   }
 
-
-
   public void stop() {
     wd.manage().timeouts().implicitlyWait(350, TimeUnit.SECONDS);
     logout();
     wd.quit();
   }
-
   public void logout() {
     navigationHelper.returnToHomePage("Logout");
   }
-
   public boolean isElementPresent(By by) {
     try {
       wd.findElement(by);
@@ -48,22 +42,11 @@ public class ApplicationManager {
     }
   }
 
+  public void returnToGroupPage() {}
 
-  public void returnToGroupPage() {
-  }
+  public GroupHelper getGroupHelper() {return groupHelper;}
 
-  public GroupHelper getGroupHelper() {
-    return groupHelper;
-  }
+  public NavigationHelper getNavigationHelper() {return navigationHelper;}
 
-  public NavigationHelper getNavigationHelper() {
-    return navigationHelper;
-  }
-
-  public ContactHelper getContactHelper() {
-    return contactHelper;
-  }
-
-
-
+  public ContactHelper getContactHelper() {return contactHelper;}
 }
