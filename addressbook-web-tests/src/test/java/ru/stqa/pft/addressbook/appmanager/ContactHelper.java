@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import static java.lang.Thread.sleep;
@@ -24,7 +23,7 @@ public class ContactHelper extends HelperBase {
     sleep(2000);
   }
 
-  public void selectContactForDeletion() throws InterruptedException {
+  public void selectContact() throws InterruptedException {
     click(By.xpath("//input[@id]"));
     sleep(2000);
   }
@@ -38,7 +37,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath(s));
   }
 
-  public void fillNewContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("title"), contactData.getTitle());
@@ -46,7 +45,13 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
     type(By.name("work"), contactData.getTelephoneWork());
     type(By.name("email"), contactData.getEmail());
-    click(By.name("new_group"));
-    new Select(wd.findElement(By.name(contactData.getContactGroup()))).selectByVisibleText("testQ1");
+  }
+
+  public void initEditSelectedContact() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void submitContactModification() {
+    click(By.cssSelector("input[name=\"update\"]"));
   }
 }
