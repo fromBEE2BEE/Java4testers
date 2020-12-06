@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactModificationTests extends TestBase {
   @Test
-  public void testContactModification() throws InterruptedException {
+  public void testContactModification() {
     app.getContactHelper().selectContact();
     app.getContactHelper().initEditSelectedContact();
     app.getContactHelper().fillContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com"));

@@ -60,10 +60,25 @@ protected final ApplicationManager app = new ApplicationManager();
     testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.2'	
 	
 	FirefoxDriver wd;
-	
+		
 	FirefoxDriver wd;
 	
 	/html/body/div/div[4]/form[1]/input[1]
+	
+	
+	ОК		public void selectContact() throws InterruptedException {
+			click(By.xpath("//input[@id]"));
+deleted		sleep(2000);
+	}
+	
+	
+			public void initDeleteSelectedContact() throws InterruptedException {
+	ок		click(By.xpath("//div[2]/input"));
+deleted		sleep(2000);
+	}
+	
+	
+		
 	
 	
 	

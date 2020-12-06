@@ -5,27 +5,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import static java.lang.Thread.sleep;
-
 public class ContactHelper extends HelperBase {
 
   public ContactHelper(FirefoxDriver wd) {
     super(wd);
   }
 
-  public void alertContactDeletion() throws InterruptedException {
+  public void alertContactDeletion() {
     acceptAlert();
-    sleep(3000);
+    wd.findElementByCssSelector("div.msgbox");
   }
 
-  public void initDeleteSelectedContact() throws InterruptedException {
+  public void initDeleteSelectedContact() {
     click(By.xpath("//div[2]/input"));
-    sleep(2000);
   }
 
-  public void selectContact() throws InterruptedException {
+  public void selectContact() {
     click(By.xpath("//input[@id]"));
-    sleep(2000);
   }
 
   public void acceptAlert(){
