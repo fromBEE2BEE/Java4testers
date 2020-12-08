@@ -2,18 +2,22 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.concurrent.TimeUnit;
 
 public class ContactHelper extends HelperBase {
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
   public void alertContactDeletion() {
     acceptAlert();
-    wd.findElementByCssSelector("div.msgbox");
+
+    wd.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+
   }
 
   public void initDeleteSelectedContact() {
