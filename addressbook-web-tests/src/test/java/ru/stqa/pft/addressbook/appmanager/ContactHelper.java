@@ -2,7 +2,9 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.concurrent.TimeUnit;
@@ -45,6 +47,10 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
     type(By.name("work"), contactData.getTelephoneWork());
     type(By.name("email"), contactData.getEmail());
+
+    if (isElementPresent(By.name("new_group"))) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    }
   }
 
   public void initEditSelectedContact() {
