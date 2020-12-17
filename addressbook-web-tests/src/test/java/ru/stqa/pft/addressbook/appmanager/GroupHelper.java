@@ -33,7 +33,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void selectGroup(String s) {
-    click(By.name(s));
+    click(By.name("selected[]"));
   }
 
   public void initGroupModification() {
@@ -42,5 +42,16 @@ public class GroupHelper extends HelperBase {
 
   public void submitGroupModification() {
     click(By.name("update"));
+  }
+
+  public void createGroup(GroupData group) {
+    initGroupCreation(By.xpath("(//input[@name='new'])[2]"));
+    fillGroupForm(group);
+    submitGroupCreation("submit");
+    returnToGroupPage("group page");
+  }
+
+  public boolean isThereAGroup() {
+    return isElementPresent(By.name("selected[]"));
   }
 }
