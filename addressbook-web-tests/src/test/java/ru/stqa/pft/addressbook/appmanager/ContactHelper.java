@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -62,4 +63,37 @@ public class ContactHelper extends HelperBase {
   public void submitContactModification() {
     click(By.cssSelector("input[name=\"update\"]"));
   }
+
+  public void createContact(ContactData contact, boolean b) {
+    initContactCreation();
+    fillContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", "testQ1"), true);
+    submitNewContactCreation("(//input[@name='submit'])[2]");
+    returnToHomePage("home page");
+  }
+
+  private void returnToHomePage(String home_page) {
+    click(By.linkText("home page"));
+  }
+
+  private void initContactCreation() {
+    click(By.linkText("add new"));
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+  public void deleteContact() {
+    selectContact();
+    initDeleteSelectedContact();
+    alertContactDeletion();
+  }
+  public void modificateContact() {
+    selectContact();
+    initEditSelectedContact();
+    fillContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", null), false);
+    submitContactModification();
+  }
+
+
+
 }
