@@ -9,9 +9,10 @@ public class GroupHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToGroupPage(String s) {
-    click(By.linkText(s));
+  public void returnToGroupPage() {wd.findElement(By.linkText("group page")).click();
   }
+
+  //public void returnToGroupPage(String s) {click(By.linkText(s));}
 
   public void submitGroupCreation(String submit) {
     click(By.name(submit));
@@ -32,8 +33,8 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  public void selectGroup(String s) {
-    click(By.name("selected[]"));
+  public void selectGroup(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void initGroupModification() {
@@ -48,7 +49,7 @@ public class GroupHelper extends HelperBase {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation("submit");
-    returnToGroupPage("group page");
+    returnToGroupPage();
   }
 
   public boolean isThereAGroup() {
