@@ -27,8 +27,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[2]/input"));
   }
 
-  public void selectContact() {
-    click(By.xpath("//input[@id]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void acceptAlert(){
@@ -83,12 +83,12 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
   public void deleteContact() {
-    selectContact();
+
     initDeleteSelectedContact();
     alertContactDeletion();
   }
   public void modificateContact() {
-    selectContact();
+
     initEditSelectedContact();
     fillContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", null), false);
     submitContactModification();

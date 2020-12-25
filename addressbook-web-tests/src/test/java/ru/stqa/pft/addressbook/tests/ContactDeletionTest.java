@@ -9,7 +9,6 @@ public class ContactDeletionTest extends TestBase {
 
   @Test
   public void testContactDeletion() {
-    int before = app.getContactHelper().getContactCount();
 
     if (!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoGroupPage();
@@ -22,11 +21,15 @@ public class ContactDeletionTest extends TestBase {
         app.getContactHelper().deleteContact();
         }
       } else {
+      int before = app.getContactHelper().getContactCount();
+      app.getContactHelper().selectContact(before - 1);
       app.getContactHelper().deleteContact();
-    }
-    int after = app.getContactHelper().getContactCount();
+      int after = app.getContactHelper().getContactCount();
+      Assert.assertEquals(after, before - 1);
 
-    Assert.assertEquals(after, before - 1);
+
+    }
+
   }
 }
 

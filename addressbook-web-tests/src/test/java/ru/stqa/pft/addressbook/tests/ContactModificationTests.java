@@ -9,7 +9,7 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification() {
 
-    int before = app.getContactHelper().getContactCount();
+
 
     if (!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoGroupPage();
@@ -24,11 +24,16 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().returnToHomePage("home page");
       }
     } else {
+      int before = app.getContactHelper().getContactCount();
+      app.getContactHelper().selectContact(before - 1);
       app.getContactHelper().modificateContact();
       app.getNavigationHelper().returnToHomePage("home page");
-    }
-    int after = app.getContactHelper().getContactCount();
 
-    Assert.assertEquals(after, before);
+      int after = app.getContactHelper().getContactCount();
+
+      Assert.assertEquals(after, before);
+
+    }
+
   }
 }
