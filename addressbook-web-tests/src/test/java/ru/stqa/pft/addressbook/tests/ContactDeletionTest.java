@@ -25,6 +25,10 @@ public class ContactDeletionTest extends TestBase {
         app.getContactHelper().deleteContact();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
+
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before, after);
+
       } else {
         app.getContactHelper().createContact(new ContactData("Makoviy", "Zhanna", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "marketing@innovecs.com", "+38(044)5937794", "Content Marketing Writer", "Innovecs", "testQ1"), true);
         List<ContactData> before = app.getContactHelper().getContactList();
@@ -32,6 +36,10 @@ public class ContactDeletionTest extends TestBase {
         app.getContactHelper().deleteContact();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
+
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before, after);
+
         }
       } else {
       List<ContactData> before = app.getContactHelper().getContactList();
@@ -39,6 +47,11 @@ public class ContactDeletionTest extends TestBase {
       app.getContactHelper().deleteContact();
       List<ContactData> after = app.getContactHelper().getContactList();
       Assert.assertEquals(after.size(), before.size() - 1);
+
+      before.remove(before.size() - 1);
+      Assert.assertEquals(before, after);
+
+
     }
   }
 }
