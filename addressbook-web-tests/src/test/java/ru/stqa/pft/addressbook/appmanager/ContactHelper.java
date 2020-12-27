@@ -3,11 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ContactHelper extends HelperBase {
@@ -19,7 +22,7 @@ public class ContactHelper extends HelperBase {
   public void alertContactDeletion() {
     acceptAlert();
 
-    wd.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
   }
 
@@ -66,11 +69,11 @@ public class ContactHelper extends HelperBase {
 
   public void createContact(ContactData contact, boolean b) {
     initContactCreation();
-    fillContactForm(new ContactData("Zhanna", "Makoviy", "Content Marketing Writer", "Innovecs", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "+38(044)5937794", "marketing@innovecs.com", "testQ1"), true);
+    fillContactForm(new ContactData("Makoviy", "Zhanna", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "marketing@innovecs.com", "+38(044)5937794", "Content Marketing Writer", "Innovecs", "testQ1"), true);
     submitNewContactCreation("(//input[@name='submit'])[2]");
     returnToHomePage("home page");
   }
-
+//
   private void returnToHomePage(String home_page) {
     click(By.linkText("home page"));
   }
@@ -97,5 +100,17 @@ public class ContactHelper extends HelperBase {
 
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span#search_count"));
+    for (WebElement element : elements) {
+      String lastName = element.getText();
+      String firstName = element.getText();
+      ContactData contact = new ContactData(lastName, firstName, null, null, null, null, null, null);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }
