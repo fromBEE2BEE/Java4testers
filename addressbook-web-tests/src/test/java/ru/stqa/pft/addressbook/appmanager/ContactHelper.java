@@ -43,13 +43,14 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
-    type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
+    type(By.name("firstname"), contactData.getFirstname());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("work"), contactData.getTelephoneWork());
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
-    type(By.name("address"), contactData.getAddress());
-    type(By.name("work"), contactData.getTelephoneWork());
-    type(By.name("email"), contactData.getEmail());
+
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -89,10 +90,10 @@ public class ContactHelper extends HelperBase {
     initDeleteSelectedContact();
     alertContactDeletion();
   }
-  public void modificateContact() {
+  public void modificateContact(ContactData contact, boolean b) {
 
     initEditSelectedContact();
-    fillContactForm(new ContactData("Makoviy", "Zhanna", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "marketing@innovecs.com", "+38(044)5937794", "Content Marketing Writer", "Innovecs", null), false);
+    fillContactForm(new ContactData(null, "Makoviy", "Zhanna", "Kyiv, blvr Vatslava Gavela, 6 \"3\"", "marketing@innovecs.com", "+38(044)5937794", "Content Marketing Writer", "Innovecs", null), false);
     submitContactModification();
   }
 
@@ -107,7 +108,8 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       String lastName = element.getText();
       String firstName = element.getText();
-      ContactData contact = new ContactData(lastName, firstName, null, null, null, null, null, null);
+      String id = element.findElement(By.xpath("//tr[4]/td/input")).getAttribute("value");
+      ContactData contact = new ContactData(id, lastName, firstName, null, null, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
